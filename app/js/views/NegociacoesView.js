@@ -12,9 +12,7 @@ class NegociacoesView extends View {
             </thead>
         
             <tbody>
-                ${
-        // O map retorna um Array, mas queremos uma string, entao usamos o join sem separador
-        negociacoes.list().map((n) => {
+                ${negociacoes.list().map((n) => {
             return `
                         <tr>
                             <td>${n.data.toLocaleDateString()}</td>
