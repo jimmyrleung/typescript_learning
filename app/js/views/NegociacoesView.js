@@ -1,6 +1,9 @@
-class NegociacoesView extends View {
-    template(negociacoes) {
-        return `
+var Views;
+(function (Views) {
+    var View = Views.View;
+    class NegociacoesView extends View {
+        template(negociacoes) {
+            return `
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -13,7 +16,7 @@ class NegociacoesView extends View {
         
             <tbody>
                 ${negociacoes.list().map((n) => {
-            return `
+                return `
                         <tr>
                             <td>${n.data.toLocaleDateString()}</td>
                             <td>${n.quantidade}</td>
@@ -21,13 +24,15 @@ class NegociacoesView extends View {
                             <td>${n.volume}</td>
                         </tr>
                         `;
-        }).join('')}
+            }).join('')}
             </tbody>
         
             <tfoot>
             </tfoot>
     </table>
         `;
+        }
+        ;
     }
-    ;
-}
+    Views.NegociacoesView = NegociacoesView;
+})(Views || (Views = {}));
