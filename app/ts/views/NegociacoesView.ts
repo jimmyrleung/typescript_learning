@@ -1,12 +1,12 @@
-namespace Views {
-    import View = Views.View;
-    
-    // Should be exported because it's inside a namespace
-    export class NegociacoesView extends View<Negociacoes>{
+import { View } from './View';
+import { Negociacoes } from '../models/Negociacoes';
+import { Negociacao } from '../models/Negociacao';
 
-        template(negociacoes: Negociacoes): string {
+export class NegociacoesView extends View<Negociacoes>{
 
-            return `
+    template(negociacoes: Negociacoes): string {
+
+        return `
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -19,9 +19,9 @@ namespace Views {
         
             <tbody>
                 ${
-                // O map retorna um Array, mas queremos uma string, entao usamos o join sem separador
-                negociacoes.list().map((n) => {
-                    return `
+            // O map retorna um Array, mas queremos uma string, entao usamos o join sem separador
+            negociacoes.list().map((n) => {
+                return `
                         <tr>
                             <td>${n.data.toLocaleDateString()}</td>
                             <td>${n.quantidade}</td>
@@ -29,8 +29,8 @@ namespace Views {
                             <td>${n.volume}</td>
                         </tr>
                         `;
-                }).join('')
-                }
+            }).join('')
+            }
             </tbody>
         
             <tfoot>
@@ -38,7 +38,6 @@ namespace Views {
     </table>
         `;
 
-        };
+    };
 
-    }
 }

@@ -1,4 +1,7 @@
-class Negociacoes {
+import { Negociacao } from './Negociacao';
+
+export class Negociacoes {
+    
     private _negociacoes: Array<Negociacao> = [];
 
     add(negociacao: Negociacao) {
@@ -8,4 +11,5 @@ class Negociacoes {
     list(): Array<Negociacao> {
         return [...this._negociacoes];
     }
+
 }
