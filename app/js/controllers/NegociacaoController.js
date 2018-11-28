@@ -1,7 +1,7 @@
 System.register(["../views/index", "../models/index"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, NegociacaoController;
+    var index_1, index_2, NegociacaoController, DiasDaSemana;
     return {
         setters: [
             function (index_1_1) {
@@ -24,12 +24,30 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                 }
                 add(evt) {
                     evt.preventDefault();
-                    this._negociacoes.add(new index_2.Negociacao(new Date(this._inputData.val().replace(/-/g, ",")), parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val())));
+                    const dt = new Date(this._inputData.val().replace(/-/g, ","));
+                    if (!this.isDiaUtil(dt)) {
+                        this._mensagemView.update("Só é possível negociar em dias úteis!");
+                        return;
+                    }
+                    this._negociacoes.add(new index_2.Negociacao(dt, parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val())));
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update("Negociação adicionada com sucesso!");
                 }
+                isDiaUtil(dt) {
+                    return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
+                }
             };
             exports_1("NegociacaoController", NegociacaoController);
+            (function (DiasDaSemana) {
+                DiasDaSemana[DiasDaSemana["Domingo"] = 0] = "Domingo";
+                DiasDaSemana[DiasDaSemana["Segunda"] = 1] = "Segunda";
+                DiasDaSemana[DiasDaSemana["Terca"] = 2] = "Terca";
+                DiasDaSemana[DiasDaSemana["Quarta"] = 3] = "Quarta";
+                DiasDaSemana[DiasDaSemana["Quinta"] = 4] = "Quinta";
+                DiasDaSemana[DiasDaSemana["Sexta"] = 5] = "Sexta";
+                DiasDaSemana[DiasDaSemana["Sabado"] = 6] = "Sabado";
+            })(DiasDaSemana || (DiasDaSemana = {}));
+            ;
         }
     };
 });
