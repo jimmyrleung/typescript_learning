@@ -12,11 +12,13 @@ System.register([], function (exports_1, context_1) {
                 }
                 ;
                 update(model) {
+                    console.time("view_update");
                     let template = this.template(model);
                     if (this._escape) {
                         template = template.replace(/<script>[\s\S]*?<\/script>/g, "");
                     }
                     this._element.html(template);
+                    console.timeEnd("view_update");
                 }
                 ;
             };

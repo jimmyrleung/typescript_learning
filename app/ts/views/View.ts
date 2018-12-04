@@ -8,6 +8,7 @@ export abstract class View<T> {
     };
 
     update(model: T): void {
+        console.time("view_update");
         let template = this.template(model);
 
         // escape any <script>
@@ -16,6 +17,7 @@ export abstract class View<T> {
         }
 
         this._element.html(template);
+        console.timeEnd("view_update");
     };
 
     // TODO: create an interface and remove this abstract method

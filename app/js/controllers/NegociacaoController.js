@@ -23,6 +23,7 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                     this._negociacoesView.update(this._negociacoes);
                 }
                 add(evt) {
+                    console.time("add_negotiation");
                     evt.preventDefault();
                     const dt = new Date(this._inputData.val().replace(/-/g, ","));
                     if (!this.isDiaUtil(dt)) {
@@ -32,6 +33,7 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                     this._negociacoes.add(new index_2.Negociacao(dt, parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val())));
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update("Negociação adicionada com sucesso!");
+                    console.timeEnd("add_negotiation");
                 }
                 isDiaUtil(dt) {
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;

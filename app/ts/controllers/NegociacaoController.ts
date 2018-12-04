@@ -19,6 +19,7 @@ export class NegociacaoController {
     }
 
     add(evt: Event) {
+        console.time("add_negotiation");
         evt.preventDefault();
 
         const dt = new Date(this._inputData.val().replace(/-/g, ","));
@@ -36,6 +37,7 @@ export class NegociacaoController {
 
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update("Negociação adicionada com sucesso!");
+        console.timeEnd("add_negotiation");
     }
 
     private isDiaUtil(dt: Date) {
