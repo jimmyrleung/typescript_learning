@@ -1,21 +1,23 @@
 import { NegociacoesView, MensagemView } from '../views/index';
 import { Negociacoes, Negociacao } from '../models/index';
-import { ExecutionTimeBenchmark } from '../decorators/index';
+import { ExecutionTimeBenchmark, DomInject } from '../decorators/index';
 
 export class NegociacaoController {
+
+    // Our 'DomInject' will load our DOM Elements in a lazy way
+    @DomInject("#data")
     private _inputData: JQuery;
+
+    @DomInject("#quantidade")
     private _inputQuantidade: JQuery;
+
+    @DomInject("#valor")
     private _inputValor: JQuery;
     private _negociacoes = new Negociacoes();
     private _negociacoesView = new NegociacoesView("#negociacoesView");
     private _mensagemView = new MensagemView("#mensagemView");
 
     constructor() {
-        // Como o querySelector nos devolve um tipo genérico (Element)
-        // precisamos convertê-lo para um tipo mais específico
-        this._inputData = $("#data");
-        this._inputQuantidade = $("#quantidade");
-        this._inputValor = $("#valor");
         this._negociacoesView.update(this._negociacoes);
     }
 

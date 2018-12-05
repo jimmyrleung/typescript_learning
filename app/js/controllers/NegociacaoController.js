@@ -26,9 +26,6 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                     this._negociacoes = new index_2.Negociacoes();
                     this._negociacoesView = new index_1.NegociacoesView("#negociacoesView");
                     this._mensagemView = new index_1.MensagemView("#mensagemView");
-                    this._inputData = $("#data");
-                    this._inputQuantidade = $("#quantidade");
-                    this._inputValor = $("#valor");
                     this._negociacoesView.update(this._negociacoes);
                 }
                 add(evt) {
@@ -46,6 +43,15 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
                 }
             };
+            __decorate([
+                index_3.DomInject("#data")
+            ], NegociacaoController.prototype, "_inputData", void 0);
+            __decorate([
+                index_3.DomInject("#quantidade")
+            ], NegociacaoController.prototype, "_inputQuantidade", void 0);
+            __decorate([
+                index_3.DomInject("#valor")
+            ], NegociacaoController.prototype, "_inputValor", void 0);
             __decorate([
                 index_3.ExecutionTimeBenchmark()
             ], NegociacaoController.prototype, "add", null);
