@@ -1,5 +1,6 @@
 import { NegociacoesView, MensagemView } from '../views/index';
 import { Negociacoes, Negociacao } from '../models/index';
+import { ExecutionTimeBenchmark } from '../decorators/index';
 
 export class NegociacaoController {
     private _inputData: JQuery;
@@ -18,8 +19,9 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
     }
 
+    // Decorators in this TS Version are experimental, but frameworks like AngularJS already use it.
+    @ExecutionTimeBenchmark()
     add(evt: Event) {
-        console.time("add_negotiation");
         evt.preventDefault();
 
         const dt = new Date(this._inputData.val().replace(/-/g, ","));
@@ -37,7 +39,6 @@ export class NegociacaoController {
 
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update("Negociação adicionada com sucesso!");
-        console.timeEnd("add_negotiation");
     }
 
     private isDiaUtil(dt: Date) {

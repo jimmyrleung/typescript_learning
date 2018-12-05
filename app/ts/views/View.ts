@@ -1,3 +1,5 @@
+import { ExecutionTimeBenchmark } from '../decorators/index';
+
 export abstract class View<T> {
     protected _element: JQuery;
     private _escape: boolean;
@@ -7,8 +9,8 @@ export abstract class View<T> {
         this._escape = escape;
     };
 
+    @ExecutionTimeBenchmark()
     update(model: T): void {
-        console.time("view_update");
         let template = this.template(model);
 
         // escape any <script>
@@ -17,7 +19,6 @@ export abstract class View<T> {
         }
 
         this._element.html(template);
-        console.timeEnd("view_update");
     };
 
     // TODO: create an interface and remove this abstract method
