@@ -1,4 +1,4 @@
-System.register(["../views/index", "../models/index", "../decorators/index"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "../decorators/index", "../services/index"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, index_3, NegociacaoController, DiasDaSemana;
+    var index_1, index_2, index_3, index_4, NegociacaoController, DiasDaSemana;
     return {
         setters: [
             function (index_1_1) {
@@ -18,6 +18,9 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
             },
             function (index_3_1) {
                 index_3 = index_3_1;
+            },
+            function (index_4_1) {
+                index_4 = index_4_1;
             }
         ],
         execute: function () {
@@ -26,6 +29,7 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                     this._negociacoes = new index_2.Negociacoes();
                     this._negociacoesView = new index_1.NegociacoesView("#negociacoesView");
                     this._mensagemView = new index_1.MensagemView("#mensagemView");
+                    this._negociacoesService = new index_4.NegociacaoService();
                     this._negociacoesView.update(this._negociacoes);
                 }
                 add(evt) {
@@ -43,23 +47,13 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
                 }
                 importData() {
-                    function isOk(res) {
-                        if (res.ok) {
-                            return res;
+                    this._negociacoesService.getNegociacoes()
+                        .then((negociacoes) => {
+                        if (negociacoes) {
+                            negociacoes.forEach((neg) => this._negociacoes.add(neg));
                         }
-                        else {
-                            throw new Error(res.statusText);
-                        }
-                    }
-                    fetch('http://localhost:8080/dados')
-                        .then((res) => isOk(res))
-                        .then((res) => res.json())
-                        .then((data) => {
-                        data.map((np) => new index_2.Negociacao(new Date(), np.vezes, np.montante))
-                            .forEach((neg) => this._negociacoes.add(neg));
                         this._negociacoesView.update(this._negociacoes);
-                    })
-                        .catch(err => console.log(err));
+                    });
                 }
             };
             __decorate([
