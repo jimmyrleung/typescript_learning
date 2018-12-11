@@ -42,6 +42,9 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                 isDiaUtil(dt) {
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
                 }
+                importData() {
+                    alert("Test import data");
+                }
             };
             __decorate([
                 index_3.DomInject("#data")

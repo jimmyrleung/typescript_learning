@@ -46,6 +46,10 @@ export class NegociacaoController {
     private isDiaUtil(dt: Date) {
         return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
     }
+
+    importData() {
+        alert("Test import data");
+    }
 }
 
 enum DiasDaSemana {
