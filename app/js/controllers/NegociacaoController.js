@@ -43,7 +43,23 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
                 }
                 importData() {
-                    alert("Test import data");
+                    function isOk(res) {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    }
+                    fetch('http://localhost:8080/dados')
+                        .then((res) => isOk(res))
+                        .then((res) => res.json())
+                        .then((data) => {
+                        data.map((np) => new index_2.Negociacao(new Date(), np.vezes, np.montante))
+                            .forEach((neg) => this._negociacoes.add(neg));
+                        this._negociacoesView.update(this._negociacoes);
+                    })
+                        .catch(err => console.log(err));
                 }
             };
             __decorate([
@@ -58,6 +74,9 @@ System.register(["../views/index", "../models/index", "../decorators/index"], fu
             __decorate([
                 index_3.ExecutionTimeBenchmark()
             ], NegociacaoController.prototype, "add", null);
+            __decorate([
+                index_3.Throttle()
+            ], NegociacaoController.prototype, "importData", null);
             exports_1("NegociacaoController", NegociacaoController);
             (function (DiasDaSemana) {
                 DiasDaSemana[DiasDaSemana["Domingo"] = 0] = "Domingo";
