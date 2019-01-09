@@ -1,4 +1,4 @@
-System.register(["../views/index", "../models/index", "../decorators/index", "../services/index"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "../decorators/index", "../services/index", "../util/utils"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, index_3, index_4, NegociacaoController, DiasDaSemana;
+    var index_1, index_2, index_3, index_4, utils_1, NegociacaoController, DiasDaSemana;
     return {
         setters: [
             function (index_1_1) {
@@ -21,6 +21,9 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
             },
             function (index_4_1) {
                 index_4 = index_4_1;
+            },
+            function (utils_1_1) {
+                utils_1 = utils_1_1;
             }
         ],
         execute: function () {
@@ -40,9 +43,9 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
                         return;
                     }
                     const negociacao = new index_2.Negociacao(dt, parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val()));
-                    negociacao.log();
+                    utils_1.log(negociacao);
                     this._negociacoes.add(negociacao);
-                    this._negociacoes.log();
+                    utils_1.log(this._negociacoes);
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update("Negociação adicionada com sucesso!");
                 }

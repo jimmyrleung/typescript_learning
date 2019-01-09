@@ -1,12 +1,17 @@
-System.register([], function (exports_1, context_1) {
+System.register(["./printable"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var Negociacoes;
+    var printable_1, Negociacoes;
     return {
-        setters: [],
+        setters: [
+            function (printable_1_1) {
+                printable_1 = printable_1_1;
+            }
+        ],
         execute: function () {
-            Negociacoes = class Negociacoes {
+            Negociacoes = class Negociacoes extends printable_1.Printable {
                 constructor() {
+                    super(...arguments);
                     this._negociacoes = [];
                 }
                 add(negociacao) {
@@ -18,7 +23,7 @@ System.register([], function (exports_1, context_1) {
                 }
                 ;
                 log() {
-                    this._negociacoes.forEach((n) => n.log());
+                    console.log(JSON.stringify(this._negociacoes));
                 }
                 ;
             };

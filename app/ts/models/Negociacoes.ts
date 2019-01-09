@@ -1,22 +1,23 @@
 import { Negociacao } from './Negociacao';
+import { Printable } from './printable';
 
-export class Negociacoes {
+export class Negociacoes extends Printable {
 
-    private _negociacoes: Array<Negociacao> = [];
+    private _negociacoes: Negociacao[] = [];
 
     add(negociacao: Negociacao) {
         this._negociacoes.push(negociacao);
     };
 
-    list(): Array<Negociacao> {
+    list(): Negociacao[] {
         return [...this._negociacoes];
 
         // Another cool way of return:
         // return ([] as Negociacao[]).concat(this._negociacoes);
     };
 
-    log(): void {
-        this._negociacoes.forEach((n) => n.log());
+    log() {
+        console.log(JSON.stringify(this._negociacoes));
     };
 
 }
