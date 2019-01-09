@@ -16,6 +16,11 @@ System.register([], function (exports_1, context_1) {
                 list() {
                     return [...this._negociacoes];
                 }
+                ;
+                log() {
+                    this._negociacoes.forEach((n) => n.log());
+                }
+                ;
             };
             exports_1("Negociacoes", Negociacoes);
         }

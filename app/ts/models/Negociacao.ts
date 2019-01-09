@@ -6,5 +6,14 @@ export class Negociacao {
         readonly valor: number
     ) { }
 
-    get volume(): number { return this.quantidade * this.valor; }
+    get volume(): number { return this.quantidade * this.valor; };
+
+    log(): void {
+        console.log(`
+            Data: ${this.data}
+            Quantidade: ${this.quantidade}, 
+            Valor: ${this.valor}, 
+            Volume: ${this.volume}
+        `);
+    };
 }

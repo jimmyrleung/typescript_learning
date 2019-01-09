@@ -39,7 +39,10 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
                         this._mensagemView.update("Só é possível negociar em dias úteis!");
                         return;
                     }
-                    this._negociacoes.add(new index_2.Negociacao(dt, parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val())));
+                    const negociacao = new index_2.Negociacao(dt, parseInt(this._inputQuantidade.val()), parseFloat(this._inputValor.val()));
+                    negociacao.log();
+                    this._negociacoes.add(negociacao);
+                    this._negociacoes.log();
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update("Negociação adicionada com sucesso!");
                 }

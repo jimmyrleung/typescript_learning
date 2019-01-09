@@ -1,7 +1,6 @@
 import { NegociacoesView, MensagemView } from '../views/index';
 import { Negociacoes, Negociacao } from '../models/index';
 import { ExecutionTimeBenchmark, DomInject, Throttle } from '../decorators/index';
-import { INegociacaoParcial } from '../interfaces/index';
 import { NegociacaoService } from '../services/index';
 
 export class NegociacaoController {
@@ -37,10 +36,15 @@ export class NegociacaoController {
             return;
         }
 
-        this._negociacoes.add(new Negociacao(
+        const negociacao = new Negociacao(
             dt, parseInt(this._inputQuantidade.val()),
             parseFloat(this._inputValor.val()),
-        ));
+        );
+
+        negociacao.log();
+
+        this._negociacoes.add(negociacao);
+        this._negociacoes.log();
 
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update("Negociação adicionada com sucesso!");
@@ -50,7 +54,7 @@ export class NegociacaoController {
         return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
     }
 
-    @Throttle()
+    @Throttle() // prevent an event to be triggered many times
     importData() {
         this._negociacoesService.getNegociacoes()
             .then((negociacoes) => {

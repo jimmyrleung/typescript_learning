@@ -13,6 +13,10 @@ export class Negociacoes {
 
         // Another cool way of return:
         // return ([] as Negociacao[]).concat(this._negociacoes);
-    }
+    };
+
+    log(): void {
+        this._negociacoes.forEach((n) => n.log());
+    };
 
 }
