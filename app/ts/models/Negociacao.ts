@@ -1,12 +1,12 @@
-import { Printable } from './index';
+import { IPrintable } from '../interfaces/index';
 
-export class Negociacao extends Printable {
+export class Negociacao implements IPrintable {
 
     constructor(
         readonly data: Date,
         readonly quantidade: number,
         readonly valor: number
-    ) { super(); }
+    ) { }
 
     get volume(): number { return this.quantidade * this.valor; };
 

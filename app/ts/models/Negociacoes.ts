@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
-import { Printable } from './printable';
+import { IPrintable } from '../interfaces/index';
 
-export class Negociacoes extends Printable {
+export class Negociacoes implements IPrintable {
 
     private _negociacoes: Negociacao[] = [];
 
