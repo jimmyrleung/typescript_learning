@@ -53,10 +53,13 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
                     return dt.getDay() !== DiasDaSemana.Domingo && dt.getDay() !== DiasDaSemana.Sabado;
                 }
                 importData() {
+                    const negociacoesImportadas = this._negociacoes.list();
                     this._negociacoesService.getNegociacoes()
                         .then((negociacoes) => {
                         if (negociacoes) {
-                            negociacoes.forEach((neg) => this._negociacoes.add(neg));
+                            negociacoes
+                                .filter((n) => !negociacoesImportadas.some(ni => ni.equals(n)))
+                                .forEach((neg) => this._negociacoes.add(neg));
                         }
                         this._negociacoesView.update(this._negociacoes);
                     });

@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
-import { IPrintable } from '../interfaces/index';
+import { IPrintable, IEquals } from '../interfaces/index';
 
-export class Negociacoes implements IPrintable {
+export class Negociacoes implements IPrintable, IEquals<Negociacoes> {
 
     private _negociacoes: Negociacao[] = [];
 
@@ -20,4 +20,7 @@ export class Negociacoes implements IPrintable {
         console.log(JSON.stringify(this._negociacoes));
     };
 
+    equals(negociacoes: Negociacoes) {
+        return JSON.stringify(negociacoes) === JSON.stringify(this._negociacoes);
+    }
 }

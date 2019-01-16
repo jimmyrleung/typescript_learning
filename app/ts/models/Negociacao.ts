@@ -1,6 +1,6 @@
-import { IPrintable } from '../interfaces/index';
+import { IPrintable, IEquals } from '../interfaces/index';
 
-export class Negociacao implements IPrintable {
+export class Negociacao implements IPrintable, IEquals<Negociacao> {
 
     constructor(
         readonly data: Date,
@@ -12,6 +12,12 @@ export class Negociacao implements IPrintable {
 
     log(): void {
         console.log(JSON.stringify(this));
+    }
+
+    equals(negociacao: Negociacao): boolean {
+        return this.data.getDate() === negociacao.data.getDate() &&
+            this.data.getMonth() === negociacao.data.getMonth() &&
+            this.data.getFullYear() === negociacao.data.getFullYear();
     }
 
 }

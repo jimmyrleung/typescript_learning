@@ -21,6 +21,9 @@ System.register([], function (exports_1, context_1) {
                     console.log(JSON.stringify(this._negociacoes));
                 }
                 ;
+                equals(negociacoes) {
+                    return JSON.stringify(negociacoes) === JSON.stringify(this._negociacoes);
+                }
             };
             exports_1("Negociacoes", Negociacoes);
         }

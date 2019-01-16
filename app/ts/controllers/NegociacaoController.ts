@@ -56,10 +56,14 @@ export class NegociacaoController {
 
     @Throttle() // prevent an event to be triggered many times
     importData() {
+        const negociacoesImportadas = this._negociacoes.list();
+
         this._negociacoesService.getNegociacoes()
             .then((negociacoes) => {
                 if (negociacoes) {
-                    negociacoes.forEach((neg) => this._negociacoes.add(neg))
+                    negociacoes
+                        .filter((n) => !negociacoesImportadas.some(ni => ni.equals(n)))
+                        .forEach((neg) => this._negociacoes.add(neg))
                 }
 
                 this._negociacoesView.update(this._negociacoes)

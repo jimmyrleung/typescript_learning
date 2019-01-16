@@ -16,6 +16,11 @@ System.register([], function (exports_1, context_1) {
                 log() {
                     console.log(JSON.stringify(this));
                 }
+                equals(negociacao) {
+                    return this.data.getDate() === negociacao.data.getDate() &&
+                        this.data.getMonth() === negociacao.data.getMonth() &&
+                        this.data.getFullYear() === negociacao.data.getFullYear();
+                }
             };
             exports_1("Negociacao", Negociacao);
         }
