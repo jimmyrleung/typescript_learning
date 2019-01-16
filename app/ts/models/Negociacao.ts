@@ -1,6 +1,6 @@
-import { IPrintable, IEquals } from '../interfaces/index';
+import { IBaseModel } from '../interfaces/index';
 
-export class Negociacao implements IPrintable, IEquals<Negociacao> {
+export class Negociacao implements IBaseModel<Negociacao> {
 
     constructor(
         readonly data: Date,

@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
-import { IPrintable, IEquals } from '../interfaces/index';
+import { IBaseModel } from '../interfaces/index';
 
-export class Negociacoes implements IPrintable, IEquals<Negociacoes> {
+export class Negociacoes implements IBaseModel<Negociacoes> {
 
     private _negociacoes: Negociacao[] = [];
 
