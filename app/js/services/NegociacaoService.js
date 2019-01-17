@@ -15,7 +15,7 @@ System.register(["../models/index"], function (exports_1, context_1) {
                         .then((res) => this._isOk(res))
                         .then((res) => res.json())
                         .then((data) => data.map((np) => new index_1.Negociacao(new Date(), np.vezes, np.montante)))
-                        .catch(err => console.log(err));
+                        .catch(err => { console.log(err); throw new Error(err); });
                 }
                 _isOk(res) {
                     if (res.ok) {

@@ -9,7 +9,7 @@ export class NegociacaoService {
             .then((data: INegociacaoParcial[]) =>
                 data.map((np) => new Negociacao(new Date(), np.vezes, np.montante))
             )
-            .catch(err => console.log(err));
+            .catch(err => { console.log(err); throw new Error(err); });
     }
 
     private _isOk(res: Response) {

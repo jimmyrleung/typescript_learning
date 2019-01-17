@@ -62,6 +62,10 @@ System.register(["../views/index", "../models/index", "../decorators/index", "..
                                 .forEach((neg) => this._negociacoes.add(neg));
                         }
                         this._negociacoesView.update(this._negociacoes);
+                    })
+                        .catch((err) => {
+                        console.log(err);
+                        this._mensagemView.update("Não foi possível importar as negociações");
                     });
                 }
             };
