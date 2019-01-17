@@ -55,23 +55,23 @@ export class NegociacaoController {
     }
 
     @Throttle() // prevent an event to be triggered many times
-    importData() {
+    async importData() {
         const negociacoesImportadas = this._negociacoes.list();
 
-        this._negociacoesService.getNegociacoes()
-            .then((negociacoes) => {
-                if (negociacoes) {
-                    negociacoes
-                        .filter((n) => !negociacoesImportadas.some(ni => ni.equals(n)))
-                        .forEach((neg) => this._negociacoes.add(neg))
-                }
+        try {
+            const negociacoes = await this._negociacoesService.getNegociacoes();
 
-                this._negociacoesView.update(this._negociacoes)
-            })
-            .catch((err) => {
-                console.log(err);
-                this._mensagemView.update("Não foi possível importar as negociações");
-            });
+            if (negociacoes) {
+                negociacoes
+                    .filter((n) => !negociacoesImportadas.some(ni => ni.equals(n)))
+                    .forEach((neg) => this._negociacoes.add(neg))
+            }
+
+            this._negociacoesView.update(this._negociacoes)
+        } catch (err) {
+            console.log(err);
+            this._mensagemView.update("Não foi possível importar as negociações");
+        }
     }
 }
 
